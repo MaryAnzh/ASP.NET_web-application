@@ -14,6 +14,8 @@ export class FetchDataComponent {
       .subscribe({
         next: (result) => {
           this.forecasts = result;
+          console.log('result');
+          console.log(result);
         },
         error: console.error,
       });
