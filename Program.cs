@@ -1,8 +1,11 @@
+using var db = new ContactContext();
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton(db);
 
 var app = builder.Build();
 

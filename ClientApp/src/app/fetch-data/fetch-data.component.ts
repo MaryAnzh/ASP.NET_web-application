@@ -10,15 +10,15 @@ export class FetchDataComponent {
   public forecasts: WeatherForecast[] = [];
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<WeatherForecast[]>(baseUrl + 'weatherforecast')
-      .subscribe({
-        next: (result) => {
-          this.forecasts = result;
-          console.log('result');
-          console.log(result);
-        },
-        error: console.error,
-      });
+    // http.get<WeatherForecast[]>(baseUrl + 'weatherforecast')
+    //   .subscribe({
+    //     next: (result) => {
+    //       this.forecasts = result;
+    //       console.log('result');
+    //       console.log(result);
+    //     },
+    //     error: console.error,
+    //   });
   }
 }
 
