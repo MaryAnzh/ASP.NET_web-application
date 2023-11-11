@@ -11,13 +11,15 @@ export class ContactsService {
   private _contacts$$ = new Subject<IContact[] | null>();
   public contacts$ = this._contacts$$.asObservable();
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService) {
+    this.getContacts();
+  }
 
   async getContacts() {
     this.httpService.getContacts()
       .subscribe({
-        next: console.log,
-        error: console.error,
+        next: (value) => this._contacts$$.next(value),
+        error: (error) => console.error(error),
       });
   }
 
