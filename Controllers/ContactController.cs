@@ -17,15 +17,23 @@ public class ContactsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IEnumerable<Contact>> Get()
+    public async Task<Contact[]> Get()
     {
-        return await ContactContext.Contacts.ToArrayAsync();
+        var contacts = await ContactContext.Contacts
+            .AsNoTracking()
+            .ToArrayAsync();
+        return contacts;
     }
 
     [HttpGet("{id:int}")]
     public async Task<Contact?> Get(int id)
     {
-        return await ContactContext.Contacts.Where(c => c.Id == id).FirstOrDefaultAsync();
+        var contact = await ContactContext.Contacts
+        .Where(c => c.Id == id)
+        .AsNoTracking()
+        .FirstOrDefaultAsync();
+
+        return contact;
     }
 
     [HttpPost]
@@ -41,6 +49,13 @@ public class ContactsController : ControllerBase
     {
         ContactContext.Contacts.Update(item);
         await ContactContext.SaveChangesAsync();
+
+        // var ContactToUpdate = ContactContext.Contacts.FirstOrDefaultAsync(c => c.Id == item.Id);
+        // if (await TryUpdateModelAsync(ContactToUpdate))
+        // {
+        //     //ContactContext.Contacts.Update(item);
+        //     await ContactContext.SaveChangesAsync();
+        // }
         return item;
     }
 
