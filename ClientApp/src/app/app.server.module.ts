@@ -7,4 +7,7 @@ import { AppModule } from './app.module';
     imports: [AppModule, ServerModule],
     bootstrap: [AppComponent]
 })
-export class AppServerModule { }
+
+export class AppServerModule {
+
+ }
