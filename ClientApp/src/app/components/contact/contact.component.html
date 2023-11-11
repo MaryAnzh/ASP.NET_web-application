@@ -1,0 +1,9 @@
+<ul class="contact"
+  *ngIf="contact">
+  <li>{{number}}</li>
+  <li>{{contact.name}}</li>
+  <li>{{contact.mobilePhone}}</li>
+  <li>{{contact.jobTitle}}</li>
+  <li>{{contact.birthDate | date}}</li>
+  <li>Edit/Delete</li>
+</ul>

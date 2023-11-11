@@ -1,22 +1,12 @@
 <section class="contacts">
   <h2 class="contacts__title">Contacts</h2>
   <ul
-    class="contact__list"
+    class="contacts__list"
     *ngIf="contacts$ | async as contacts">
-    <li class="contact__list__titles">
-      <ul>
-        <li>№</li>
-        <li>Name</li>
-        <li>Phone</li>
-        <li>Job title</li>
-        <li>Birthday</li>
-      </ul>
-    </li>
-    <li
-      *ngFor="let contact of contacts; index as i; trackBy: trackByFn">
-      <span>
-        {{contact.name}}
-      </span>
-    </li>
+    <app-contact
+      *ngFor="let contact of contacts; index as i; trackBy: trackByFn"
+      [contact]="contact"
+      [number]="i + 1">
+    </app-contact>
   </ul>
 </section>
