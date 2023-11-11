@@ -1,12 +1,12 @@
 const { env } = require('process');
 
 const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_HTTPS_PORT}` :
-  env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'http://localhost:49744';
+  env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'http://localhost:44450';
 
 const PROXY_CONFIG = [
   {
     context: [
-      "/weatherforecast",
+      "/contacts",
    ],
     proxyTimeout: 10000,
     target: target,

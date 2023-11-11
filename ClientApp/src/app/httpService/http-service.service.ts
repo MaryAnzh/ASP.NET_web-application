@@ -8,7 +8,7 @@ import { responseUrl } from '../constants';
   providedIn: 'root'
 })
 
-export class HttpServiceService {
+export class HttpService {
   http: HttpClient;
   baseUrl: string;
 
