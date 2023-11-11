@@ -5,7 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton(db);
+builder.Services.AddTransient<ContactContext>();
+//builder.Services.AddSingleton(db);
 
 var app = builder.Build();
 

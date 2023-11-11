@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace test_task_vm.Controllers;
 
@@ -16,39 +17,41 @@ public class ContactsController : ControllerBase
     }
 
     [HttpGet]
-    public IEnumerable<Contact> Get()
+    public async Task<IEnumerable<Contact>> Get()
     {
-        return ContactContext.Contacts;
+        return await ContactContext.Contacts.ToArrayAsync();
     }
 
     [HttpGet("{id:int}")]
-    public Contact? Get(int id)
+    public async Task<Contact?> Get(int id)
     {
-        return ContactContext.Contacts.Where(c => c.Id == id).FirstOrDefault();
+        return await ContactContext.Contacts.Where(c => c.Id == id).FirstOrDefaultAsync();
     }
 
     [HttpPost]
-    public void Post([FromBody] Contact item)
+    public async Task<Contact> Post([FromBody] Contact item)
     {
         ContactContext.Contacts.Add(item);
-        ContactContext.SaveChanges();
+        await ContactContext.SaveChangesAsync();
+        return item;
     }
+
     [HttpPut]
-    public void Put([FromBody] Contact item)
+    public async Task<Contact> Put([FromBody] Contact item)
     {
         ContactContext.Contacts.Update(item);
-        ContactContext.SaveChanges();
+        await ContactContext.SaveChangesAsync();
+        return item;
     }
 
     [HttpDelete("{id:int}")]
-    public void Delete(int id)
+    public async Task Delete(int id)
     {
-        var elem = ContactContext.Contacts.Where(c => c.Id == id).FirstOrDefault();
+        var elem = await ContactContext.Contacts.Where(c => c.Id == id).FirstOrDefaultAsync();
         if (elem != null)
         {
             ContactContext.Contacts.Remove(elem);
-            ContactContext.SaveChanges();
+            await ContactContext.SaveChangesAsync();
         }
     }
-
 }
