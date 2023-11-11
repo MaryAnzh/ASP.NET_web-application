@@ -50,12 +50,6 @@ public class ContactsController : ControllerBase
         ContactContext.Contacts.Update(item);
         await ContactContext.SaveChangesAsync();
 
-        // var ContactToUpdate = ContactContext.Contacts.FirstOrDefaultAsync(c => c.Id == item.Id);
-        // if (await TryUpdateModelAsync(ContactToUpdate))
-        // {
-        //     //ContactContext.Contacts.Update(item);
-        //     await ContactContext.SaveChangesAsync();
-        // }
         return item;
     }
 
