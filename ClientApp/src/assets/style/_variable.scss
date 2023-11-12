@@ -9,5 +9,73 @@ $backgroundColor: #fff;
 
 //size
 $maxAppSize: 1200px;
-$minIconSize: 2rem;
+$iconSize: 30px;
 $maxFormWidth: 500px;
+
+%popUp {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba($color: #000000, $alpha: 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+%cross {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: $mainColorExtraLight;
+  align-self: flex-end;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, .2);
+  cursor: pointer;
+  transition: all .3s;
+
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 2px;
+    border-radius: 2px;
+    background-color: $mainColor;
+    pointer-events: none;
+    transition: all .3s .3s;
+
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &:hover {
+    background: $mainColor;
+    box-shadow: none;
+
+    &::after {
+      transform: rotate(45deg);
+      background-color: $mainColorExtraLight;
+    }
+
+    &::before {
+      transform: rotate(-45deg);
+      background-color: $mainColorExtraLight;
+    }
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}

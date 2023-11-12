@@ -17,7 +17,7 @@ export class ContactComponent {
   constructor(
     private contactService: ContactsService
   ) {
-    this.isPopUpOpen$ = this.contactService.isContactPopUpOpen$;
+    this.isPopUpOpen$ = this.contactService.isContactPopUpOpen$$;
   }
 
   showPopUp() {

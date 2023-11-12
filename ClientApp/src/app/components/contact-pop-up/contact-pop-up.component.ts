@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ContactsService } from 'src/app/services/contactsService/contacts.service';
 
 @Component({
@@ -8,7 +8,6 @@ import { ContactsService } from 'src/app/services/contactsService/contacts.servi
 })
 
 export class ContactPopUpComponent {
-
   constructor(
     private contactService: ContactsService
   ) { }

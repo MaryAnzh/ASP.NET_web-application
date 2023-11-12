@@ -11,8 +11,8 @@ export class ContactsService {
   private _contacts$$ = new Subject<IContact[] | null>();
   public contacts$ = this._contacts$$.asObservable();
 
-  private isContactPopUpOpen$$ = new Subject<boolean>();
-  public isContactPopUpOpen$ = this.isContactPopUpOpen$$.asObservable();
+  private isContactPopUpOpen$$$ = new Subject<boolean>();
+  public isContactPopUpOpen$$ = this.isContactPopUpOpen$$$.asObservable();
 
   constructor(private httpService: HttpService) {
     this.getContacts();
@@ -58,10 +58,10 @@ export class ContactsService {
   }
 
   showPopUp() {
-    this.isContactPopUpOpen$$.next(true);
+    this.isContactPopUpOpen$$$.next(true);
   }
 
   closePopUp() {
-    this.isContactPopUpOpen$$.next(false);
+    this.isContactPopUpOpen$$$.next(false);
   }
 }

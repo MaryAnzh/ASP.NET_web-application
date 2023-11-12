@@ -9,8 +9,26 @@
     width: 100%;
 
     &__title {
-      font-size: 1.5rem;
-      font-weight: 200;
+      display: flex;
+      align-items: unset;
+      gap: 2rem;
+
+      h2 {
+        font-size: 1.5rem;
+        font-weight: 200;
+      }
+
+      &__icon {
+        font-size: 1.5rem;
+        color: $mainColorLight;
+        cursor: pointer;
+        transition: .3s;
+
+        &:hover {
+          color: $mainColorDark;
+        }
+      }
+
     }
 
     &__list {
