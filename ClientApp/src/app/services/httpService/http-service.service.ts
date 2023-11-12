@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { IContact } from '../../interfaces/contact.interface';
+import { IContact, ICreateContact } from '../../interfaces/contact.interface';
 import { responseUrl } from '../../constants';
 import { Observable, Subject } from 'rxjs';
 
@@ -10,15 +10,32 @@ import { Observable, Subject } from 'rxjs';
 })
 
 export class HttpService {
-  http: HttpClient;
-  baseUrl: string;
+  private baseUrl: string;
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    this.http = http;
-    this.baseUrl = baseUrl;
+  constructor(
+    private http: HttpClient,
+    @Inject('BASE_URL') baseUrl: string
+  ) {
+    this.baseUrl = `${baseUrl}${responseUrl}`;
   }
 
   getContacts(): Observable<IContact[]> {
-    return this.http.get<IContact[]>(this.baseUrl + responseUrl);
+    return this.http.get<IContact[]>(this.baseUrl);
+  }
+
+  getContactById(id: number): Observable<IContact> {
+    return this.http.get<IContact>(`${this.baseUrl}/${id}`);
+  }
+
+  createContact(body: ICreateContact): Observable<IContact> {
+    return this.http.post<IContact>(this.baseUrl, body);
+  }
+
+  updateContact(body: IContact): Observable<IContact> {
+    return this.http.put<IContact>(this.baseUrl, body);
+  }
+
+  deleteContact(id: number): Observable<IContact> {
+    return this.http.delete<IContact>(`${this.baseUrl}/${id}`);
   }
 }

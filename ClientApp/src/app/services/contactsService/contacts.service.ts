@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { IContact } from 'src/app/interfaces/contact.interface';
+import { Observable, Subject } from 'rxjs';
+import { IContact, ICreateContact } from 'src/app/interfaces/contact.interface';
 import { HttpService } from '../httpService/http-service.service';
 
 @Injectable({
@@ -15,12 +15,48 @@ export class ContactsService {
     this.getContacts();
   }
 
-  async getContacts() {
+  packetDelete(start: number, end: number) {
+    for (let i = start; i <= end; i++) {
+      this.deleteContact(i);
+    }
+  }
+
+  getContacts(): void {
     this.httpService.getContacts()
       .subscribe({
         next: (value) => this._contacts$$.next(value),
-        error: (error) => console.error(error),
+        error: (error) => console.error(error.statusText),
       });
   }
 
+  getContactById(id: number): Observable<IContact> {
+    return this.httpService.getContactById(id);
+  }
+
+  createContact(contact: ICreateContact): void {
+    this.httpService.createContact(contact)
+      .subscribe({
+        next: () => this.getContacts(),
+        error: (error) => console.error(error.statusText),
+      });
+  }
+
+  updateContact(contact: IContact): void {
+    this.httpService.updateContact(contact)
+      .subscribe({
+        next: () => this.getContacts(),
+        error: (error) => console.error(error.statusText)
+      });
+  }
+
+  deleteContact(id: number): void {
+    this.httpService.deleteContact(id)
+      .subscribe({
+        next: (value) => {
+          this.getContacts();
+          console.log(value)
+        },
+        error: (error) => console.error(error.statusText),
+      })
+  }
 }

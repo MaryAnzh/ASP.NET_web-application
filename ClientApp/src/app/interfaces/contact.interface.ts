@@ -5,3 +5,10 @@ export interface IContact {
   jobTitle: string;
   birthDate: Date;
 }
+
+export interface ICreateContact {
+  name: string;
+  mobilePhone: string;
+  jobTitle: string;
+  birthDate: Date;
+}

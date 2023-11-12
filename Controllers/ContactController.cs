@@ -17,50 +17,61 @@ public class ContactsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<Contact[]> Get()
+    public async Task<IActionResult> Get()
     {
         var contacts = await ContactContext.Contacts
             .AsNoTracking()
             .ToArrayAsync();
-        return contacts;
+        return Ok(contacts);
     }
 
     [HttpGet("{id:int}")]
-    public async Task<Contact?> Get(int id)
+    public async Task<IActionResult> Get(int id)
     {
         var contact = await ContactContext.Contacts
         .Where(c => c.Id == id)
         .AsNoTracking()
         .FirstOrDefaultAsync();
-
-        return contact;
+        if (contact != null)
+        {
+            return Ok(contact);
+        }
+        else
+        {
+            return NotFound();
+        }
     }
 
     [HttpPost]
-    public async Task<Contact> Post([FromBody] Contact item)
+    public async Task<IActionResult> Post([FromBody] Contact item)
     {
         ContactContext.Contacts.Add(item);
         await ContactContext.SaveChangesAsync();
-        return item;
+        return Ok(item);
     }
 
     [HttpPut]
-    public async Task<Contact> Put([FromBody] Contact item)
+    public async Task<IActionResult> Put([FromBody] Contact item)
     {
         ContactContext.Contacts.Update(item);
         await ContactContext.SaveChangesAsync();
 
-        return item;
+        return Ok(item);
     }
 
     [HttpDelete("{id:int}")]
-    public async Task Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
         var elem = await ContactContext.Contacts.Where(c => c.Id == id).FirstOrDefaultAsync();
         if (elem != null)
         {
             ContactContext.Contacts.Remove(elem);
             await ContactContext.SaveChangesAsync();
+            return NoContent();
+        }
+        else
+        {
+            return NotFound();
         }
     }
 }
