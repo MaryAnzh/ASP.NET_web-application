@@ -1,9 +1,15 @@
 <ul class="contact"
   *ngIf="contact">
-  <li>{{number}}</li>
-  <li>{{contact.name}}</li>
-  <li>{{contact.mobilePhone}}</li>
-  <li>{{contact.jobTitle}}</li>
-  <li>{{contact.birthDate | date | date: ' d MMM, y'}}</li>
-  <li>Edit/Delete</li>
+  <li class="contact__item">{{number}}</li>
+  <li class="contact__item">{{contact.name}}</li>
+  <li class="contact__item">{{contact.mobilePhone}}</li>
+  <li class="contact__item">{{contact.jobTitle}}</li>
+  <li class="contact__item">{{contact.birthDate | date | date: ' d MMM, y'}}</li>
+  <li
+    class="contact__item"
+    (click)="showPopUp()">
+    <i class="fa-solid fa-pen-to-square contact__item__icon"></i> </li>
+  <li class="contact__item">
+    <i class="fa-solid fa-trash-can contact__item__icon"></i>
+  </li>
 </ul>

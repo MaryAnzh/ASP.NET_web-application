@@ -12,9 +12,11 @@ import { ContactsService } from 'src/app/services/contactsService/contacts.servi
 
 export class ContactsComponent {
   @Input() public contacts$: Observable<IContact[] | null>;
+  public isPopUpOpen$: Observable<boolean>;
 
   constructor(private contactService: ContactsService) {
     this.contacts$ = this.contactService.contacts$;
+    this.isPopUpOpen$ = this.contactService.isContactPopUpOpen$;
   }
 
   trackByFn(index: number, contact: IContact) {

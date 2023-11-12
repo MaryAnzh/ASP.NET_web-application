@@ -1,6 +1,9 @@
+@import '../assets/style/variable';
+
 :host {
   width: 100%;
   display: flex;
+  color: $mainColorFont;
 
   .wrapper {
     width: 100%;

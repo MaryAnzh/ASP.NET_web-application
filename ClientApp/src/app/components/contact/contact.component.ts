@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { IContact } from 'src/app/interfaces/contact.interface';
+import { ContactsService } from 'src/app/services/contactsService/contacts.service';
 
 @Component({
   selector: 'app-contact',
@@ -10,4 +12,15 @@ import { IContact } from 'src/app/interfaces/contact.interface';
 export class ContactComponent {
   @Input() contact: IContact | undefined = undefined;
   @Input() number: number | undefined;
+  public isPopUpOpen$: Observable<boolean>;
+
+  constructor(
+    private contactService: ContactsService
+  ) {
+    this.isPopUpOpen$ = this.contactService.isContactPopUpOpen$;
+  }
+
+  showPopUp() {
+    this.contactService.showPopUp();
+  }
 }
