@@ -18,12 +18,6 @@ export class ContactsService {
     this.getContacts();
   }
 
-  packetDelete(start: number, end: number) {
-    for (let i = start; i <= end; i++) {
-      this.deleteContact(i);
-    }
-  }
-
   getContacts(): void {
     this.httpService.getContacts()
       .subscribe({
@@ -52,7 +46,7 @@ export class ContactsService {
       });
   }
 
-  deleteContact(id: number): void {
+  deleteContact(id: string): void {
     this.httpService.deleteContact(id)
       .subscribe({
         next: (value) => {

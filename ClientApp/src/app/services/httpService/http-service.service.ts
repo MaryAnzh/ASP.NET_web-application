@@ -35,7 +35,7 @@ export class HttpService {
     return this.http.put<IContact>(this.baseUrl, body);
   }
 
-  deleteContact(id: number): Observable<IContact> {
+  deleteContact(id: string): Observable<IContact> {
     return this.http.delete<IContact>(`${this.baseUrl}/${id}`);
   }
 }

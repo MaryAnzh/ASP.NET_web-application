@@ -23,4 +23,10 @@ export class ContactComponent {
   showPopUp() {
     this.contactService.showPopUp();
   }
+
+  delete() {
+    if (this.contact) {
+      this.contactService.deleteContact(this.contact.id);
+    }
+  }
 }
