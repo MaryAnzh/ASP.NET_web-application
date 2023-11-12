@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IContact } from 'src/app/interfaces/contact.interface';
+import { IContact, ModeInfo, PopUpMode, PopUpStatus } from 'src/app/interfaces/contact.interface';
 import { ContactsService } from 'src/app/services/contactsService/contacts.service';
 
 @Component({
@@ -12,16 +12,23 @@ import { ContactsService } from 'src/app/services/contactsService/contacts.servi
 export class ContactComponent {
   @Input() contact: IContact | undefined = undefined;
   @Input() number: number | undefined;
-  public isPopUpOpen$: Observable<boolean>;
+  public isPopUpOpen$: Observable<PopUpStatus>;
+  private editMode: PopUpMode = PopUpMode.edit;
 
   constructor(
     private contactService: ContactsService
   ) {
-    this.isPopUpOpen$ = this.contactService.isContactPopUpOpen$$;
+    this.isPopUpOpen$ = this.contactService.isContactPopUpOpen$;
   }
 
-  showPopUp() {
-    this.contactService.showPopUp();
+  editContact() {
+    if (this.contact) {
+      const modInfo: ModeInfo = {
+        mode: this.editMode,
+        contact: this.contact,
+      }
+      this.contactService.showPopUp(modInfo);
+    }
   }
 
   delete() {

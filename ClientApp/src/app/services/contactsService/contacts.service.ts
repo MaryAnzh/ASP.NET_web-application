@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { IContact, ICreateContact } from 'src/app/interfaces/contact.interface';
+import { IContact, ICreateContact, ModeInfo, PopUpStatus } from 'src/app/interfaces/contact.interface';
 import { HttpService } from '../httpService/http-service.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,8 @@ export class ContactsService {
   private _contacts$$ = new Subject<IContact[] | null>();
   public contacts$ = this._contacts$$.asObservable();
 
-  private isContactPopUpOpen$$$ = new Subject<boolean>();
-  public isContactPopUpOpen$$ = this.isContactPopUpOpen$$$.asObservable();
+  private isContactPopUpOpen$$ = new Subject<PopUpStatus>();
+  public isContactPopUpOpen$ = this.isContactPopUpOpen$$.asObservable();
 
   constructor(private httpService: HttpService) {
     this.getContacts();
@@ -57,11 +58,11 @@ export class ContactsService {
       })
   }
 
-  showPopUp() {
-    this.isContactPopUpOpen$$$.next(true);
+  showPopUp(mode: ModeInfo) {
+    this.isContactPopUpOpen$$.next(mode);
   }
 
   closePopUp() {
-    this.isContactPopUpOpen$$$.next(false);
+    this.isContactPopUpOpen$$.next(false);
   }
 }

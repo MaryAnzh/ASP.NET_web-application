@@ -1,13 +1,14 @@
 <section class="contacts">
   <ng-container
-    *ngIf="isPopUpOpen$ | async">
-    <app-contact-pop-up></app-contact-pop-up>
+    *ngIf="isPopUpOpen$ | async as mode">
+    <app-contact-pop-up
+      [mode]="mode"></app-contact-pop-up>
   </ng-container>
   <div class="contacts__title">
     <h2>Contacts</h2>
     <i
       class="fa-solid fa-file-circle-plus contacts__title__icon"
-      (click)="showContactPopUp()"></i>
+      (click)="createContact()"></i>
   </div>
   <ul
     class="contacts__list"

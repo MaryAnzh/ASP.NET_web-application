@@ -12,3 +12,11 @@ export interface ICreateContact {
   jobTitle: string;
   birthDate: Date;
 }
+
+export enum PopUpMode { create = 'create', edit = "edit" };
+export type ModeInfo = {
+  mode: PopUpMode,
+  contact?: IContact
+}
+export type PopUpStatus = ModeInfo | false;
+

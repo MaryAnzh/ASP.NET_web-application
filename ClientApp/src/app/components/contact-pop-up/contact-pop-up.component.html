@@ -1,6 +1,39 @@
-<form class="contact-pop-up">
+<div
+  *ngIf="mode"
+  class="contact-pop-up">
   <div
     class="contact-pop-up__cross"
     (click)="close()"></div>
-  <h3 class="contact-pop-up__title">Edit Contact</h3>
-</form>
+  <h3 class="contact-pop-up__title">{{mode.mode}} Component</h3>
+  <form
+    class="contact-pop-up__form"
+    [formGroup]="newContactForm">
+    <div class="contact-pop-up__form__group">
+      <label>{{formField.name}}</label>
+      <input
+        type="text"
+        formControlName="name" />
+    </div>
+    <div class="contact-pop-up__form__group">
+      <label>{{formField.phone}}</label>
+      <input
+        type="tel"
+        formControlName="phone" />
+    </div>
+    <div class="contact-pop-up__form__group">
+      <label>{{formField.job}}</label>
+      <input
+        type="text"
+        formControlName="job" />
+    </div>
+    <div class="contact-pop-up__form__group">
+      <label>{{formField.birthDate}}</label>
+      <input
+        type="date"
+        formControlName="birthDate" />
+    </div>
+    <div class="contact-pop-up__form__button-wrap">
+      <button class="contact-pop-up__form__button-wrap__submit">{{mode.mode}}</button>
+    </div>
+  </form>
+</div>
