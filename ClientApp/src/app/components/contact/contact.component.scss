@@ -4,7 +4,6 @@
   width: 100%;
   display: flex;
 
-
   .contact {
     display: flex;
 
@@ -73,11 +72,11 @@
       box-shadow: 5px 5px 8px rgba($color: gray, $alpha: 0.3);
 
       li {
-        width: fit-content;
         border: none;
       }
 
       &__item:nth-child(1) {
+        width: fit-content;
         background-color: $mainColorExtraLight;
         border-radius: 0.25rem;
       }
@@ -97,9 +96,9 @@
       }
     }
 
-    &__item:nth-child(4) {
-      overflow: none;
-      text-overflow: none;
+    li:nth-child(4) {
+      height: 70px;
+      word-wrap: break-word;
     }
 
     .header {

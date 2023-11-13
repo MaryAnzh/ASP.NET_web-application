@@ -5,9 +5,10 @@
     *ngFor="let item of contactHeader">{{item}}
   </li>
 </ul>
-<ul class="contact"
+<ul
+  [ngClass]="{'contact': true, 'contact-card': false}"
   *ngIf="contact && !isHeaders">
-  <li class="contact__item">{{number}}</li>
+  <li class="contact__item ">{{number}}</li>
   <li class="contact__item">{{contact.name}}</li>
   <li class="contact__item">{{contact.mobilePhone}}</li>
   <li class="contact__item" title="{{contact.jobTitle}}}">{{contact.jobTitle}}</li>
