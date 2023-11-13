@@ -80,3 +80,23 @@ $maxFormWidth: 500px;
     transform: scale(0.9);
   }
 }
+
+%textHidden {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+%icons {
+  color: $mainColor;
+  cursor: pointer;
+  transition: all .3s;
+
+  &:hover {
+    color: $mainColorDark;
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}

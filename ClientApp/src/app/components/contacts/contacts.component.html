@@ -10,13 +10,18 @@
     <span
       class="contacts__title__count"
       *ngIf="contacts$ | async as list">
-      (- {{list.length}} )
+      {{list.length}}
     </span>
     <i
       class="fa-solid fa-file-circle-plus contacts__title__icon"
       title="add new contact"
-      (click)="createContact()"></i>
+      (click)="createContact()">
+    </i>
   </div>
+  <!-- <div class="contacts__view">
+    <i class="fa-solid fa-list contacts__view__icon"></i>
+    <i class="fa-solid fa-table-cells contacts__view__icon"></i>
+  </div> -->
   <ul
     class="contacts__list">
     <app-contact
@@ -29,6 +34,16 @@
         [contact]="contact"
         [number]="i + 1">
       </app-contact>
+      <p
+        *ngIf="contacts.length === 0">
+        <span>Add new Contact with</span>
+        <br />
+        <i
+          class="fa-solid fa-file-circle-plus contacts__title__icon"
+          title="add new contact"
+          (click)="createContact()">
+        </i>
+      </p>
     </ng-container>
   </ul>
 </section>

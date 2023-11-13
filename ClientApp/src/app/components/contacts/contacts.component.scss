@@ -37,6 +37,16 @@
 
     }
 
+    &__view {
+      padding: 1rem;
+      display: flex;
+      gap: 1rem;
+
+      &__icon {
+        @extend %icons;
+      }
+    }
+
     &__list {
       width: 100%;
 
