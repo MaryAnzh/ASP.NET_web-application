@@ -3,6 +3,16 @@
 :host {
   @extend %popUp;
 
+  .disable {
+    pointer-events: none;
+    opacity: .4;
+  }
+
+  .fieldError {
+    border-color: red;
+    background: rgb(253, 242, 242);
+  }
+
   .contact-pop-up {
     width: 100%;
     max-width: $maxFormWidth;

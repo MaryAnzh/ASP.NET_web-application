@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, AbstractControl, Validators } from '@angular/forms';
-import { ModeInfo, PopUpStatus } from 'src/app/interfaces/contact.interface';
+import { IContact, ICreateContact, ModeInfo, PopUpMode } from 'src/app/interfaces/contact.interface';
 import { ContactsService } from 'src/app/services/contactsService/contacts.service';
+import { CustomValidators } from 'src/app/utile/CustomValidators';
+
 
 enum FormField {
   name = 'name',
@@ -31,50 +33,35 @@ export class ContactPopUpComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.newContactForm = new FormGroup({
+      [FormField.name]: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(32)
+      ]),
+      [FormField.phone]: new FormControl('', [
+        Validators.required,
+        Validators.minLength(12),
+        Validators.maxLength(16)
+      ]),
+      [FormField.job]: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(50),
+        Validators.minLength(3),
+      ]),
+      [FormField.birthDate]: new FormControl('', [
+        Validators.required,
+        CustomValidators.dateValidators()
+      ]),
+    });
+
     if (this.mode?.contact) {
       const date = new Date(this.mode.contact.birthDate).toISOString().slice(0, 10);
 
-      this.newContactForm = new FormGroup({
-        [FormField.name]: new FormControl(this.mode.contact.name, [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(32)
-        ]),
-        [FormField.phone]: new FormControl(this.mode.contact.mobilePhone, [
-          Validators.required,
-          Validators.maxLength(12),
-          Validators.minLength(12),
-        ]),
-        [FormField.job]: new FormControl(this.mode.contact.jobTitle, [
-          Validators.required,
-          Validators.maxLength(3),
-          Validators.minLength(50),
-        ]),
-        [FormField.birthDate]: new FormControl(date, [
-          Validators.required,
-        ]),
-      });
-    } else {
-      this.newContactForm = new FormGroup({
-        [FormField.name]: new FormControl('', [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(32)
-        ]),
-        [FormField.phone]: new FormControl('', [
-          Validators.required,
-          Validators.maxLength(12),
-          Validators.minLength(12),
-        ]),
-        [FormField.job]: new FormControl('', [
-          Validators.required,
-          Validators.maxLength(3),
-          Validators.minLength(50),
-        ]),
-        [FormField.birthDate]: new FormControl('', [
-          Validators.required,
-        ]),
-      });
+      this.name.setValue(this.mode.contact.name);
+      this.phone.setValue(this.mode.contact.mobilePhone);
+      this.job.setValue(this.mode.contact.jobTitle);
+      this.birthDate.setValue(date);
     }
   }
 
@@ -91,6 +78,31 @@ export class ContactPopUpComponent implements OnInit {
     return <AbstractControl>this.newContactForm.get(FormField.birthDate);
   }
 
+  submit() {
+    const contact: ICreateContact = {
+      name: this.newContactForm.value.name,
+      mobilePhone: this.newContactForm.value.phone,
+      jobTitle: this.newContactForm.value.job,
+      birthDate: this.newContactForm.value.birthDate,
+    }
+
+    switch (this.mode?.mode) {
+      case PopUpMode.create:
+        this.contactService.createContact(contact);
+        break;
+      case PopUpMode.edit:
+        this.updateContact(contact);
+        break;
+    }
+    this.contactService.closePopUp();
+  }
+
+  updateContact(contact: ICreateContact) {
+    if (this.mode?.contact) {
+      const bogy: IContact = { ...contact, id: this.mode.contact.id };
+      this.contactService.updateContact(bogy);
+    }
+  }
 
   close(): void {
     this.contactService.closePopUp();
