@@ -4,19 +4,31 @@
     <app-contact-pop-up
       [mode]="mode"></app-contact-pop-up>
   </ng-container>
+
   <div class="contacts__title">
-    <h2>Contacts</h2>
+    <h2 class="contacts__title__headers">Contacts</h2>
+    <span
+      class="contacts__title__count"
+      *ngIf="contacts$ | async as list">
+      (- {{list.length}} )
+    </span>
     <i
       class="fa-solid fa-file-circle-plus contacts__title__icon"
+      title="add new contact"
       (click)="createContact()"></i>
   </div>
   <ul
-    class="contacts__list"
-    *ngIf="contacts$ | async as contacts">
+    class="contacts__list">
     <app-contact
-      *ngFor="let contact of contacts; index as i; trackBy: trackByFn"
-      [contact]="contact"
-      [number]="i + 1">
+      [isHeaders]="true">
     </app-contact>
+    <ng-container
+      *ngIf="contacts$ | async as contacts">
+      <app-contact
+        *ngFor="let contact of contacts; index as i; trackBy: trackByFn"
+        [contact]="contact"
+        [number]="i + 1">
+      </app-contact>
+    </ng-container>
   </ul>
 </section>

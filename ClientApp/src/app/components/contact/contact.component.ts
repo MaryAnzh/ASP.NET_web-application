@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IContact, ModeInfo, PopUpMode, PopUpStatus } from 'src/app/interfaces/contact.interface';
 import { ContactsService } from 'src/app/services/contactsService/contacts.service';
+import { contactHeader } from 'src/app/constants';
 
 @Component({
   selector: 'app-contact',
@@ -14,6 +15,8 @@ export class ContactComponent {
   @Input() number: number | undefined;
   public isPopUpOpen$: Observable<PopUpStatus>;
   private editMode: PopUpMode = PopUpMode.edit;
+  @Input() public isHeaders: boolean = false;
+  public contactHeader = contactHeader;
 
   constructor(
     private contactService: ContactsService
