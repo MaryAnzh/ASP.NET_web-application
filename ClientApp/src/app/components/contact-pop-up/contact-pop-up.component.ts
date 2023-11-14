@@ -3,7 +3,7 @@ import { FormGroup, FormControl, AbstractControl, Validators } from '@angular/fo
 import { IContact, ICreateContact, ModeInfo, PopUpMode } from 'src/app/interfaces/contact.interface';
 import { ContactsService } from 'src/app/services/contactsService/contacts.service';
 import { CustomValidators } from 'src/app/utile/CustomValidators';
-import { formValidateData, FormField } from 'src/app/constants';
+import { formValidateData, FormField, errorMessage } from 'src/app/constants';
 
 
 @Component({
@@ -22,6 +22,7 @@ export class ContactPopUpComponent implements OnInit {
     birthDate: FormField.birthDate
   }
   public formValidateData = formValidateData;
+  public errorMessage = errorMessage;
 
 
   constructor(

@@ -13,67 +13,116 @@
 
     <div class="contact-pop-up__form__group">
       <label
-        for="formName"
         class="contact-pop-up__form__group__label">
         {{formField.name}}: <span>*</span>
       </label>
       <input
         [ngClass]="{
           'contact-pop-up__form__group__field': true,
-          'fieldError': name.invalid && name.touched || name.dirty}"
+          'field-error': name.invalid && name.touched || name.dirty}"
         type="text"
         [maxlength]="formValidateData.name.max"
         formControlName="name"
-        placeholder="enter you name"
-        #formName />
+        placeholder="enter you name" />
+      <div class="contact-pop-up__form__group__error">
+        <ng-container
+          *ngIf="name.invalid && name.touched || name.dirty">
+          <p
+            *ngIf="name.errors?.['required']">
+            {{errorMessage.empty}}
+          </p>
+          <p
+            *ngIf="name.errors?.['minlength']">
+            {{errorMessage.minLength(formValidateData.name.min)}}
+          </p>
+        </ng-container>
+      </div>
     </div>
+
     <div class="contact-pop-up__form__group">
       <label
         for="formPhone"
         class="contact-pop-up__form__group__label">
         {{formField.phone}}: <span>*</span>
       </label>
-      <span class="contact-pop-up__form__group__phone-plus">+</span>
-      <input
-        [ngClass]="{
-          'contact-pop-up__form__group__field': true,
-          'contact-pop-up__form__group__field-phone': true,
-          'fieldError': phone.invalid && phone.touched || phone.dirty}"
-        type="text"
-        [maxlength]="formValidateData.phone.max"
-        formControlName="phone"
-        placeholder="{{formValidateData.phone.max}} symbols"
-        #formPhone />
+      <div class="contact-pop-up__form__group__phone-input">
+        <span>+</span>
+        <input
+          [ngClass]="{
+          'field-error': phone.invalid && phone.touched || phone.dirty}"
+          type="tel"
+          [maxlength]="formValidateData.phone.max"
+          formControlName="phone"
+          placeholder="{{formValidateData.phone.max}} symbols"
+          #formPhone />
+      </div>
+      <div class="contact-pop-up__form__group__error">
+        <ng-container
+          *ngIf="phone.invalid && phone.touched || phone.dirty">
+          <p
+            *ngIf="phone.errors?.['required']">
+            {{errorMessage.empty}}
+          </p>
+          <p
+            *ngIf="phone.hasError('minlength')">
+            {{errorMessage.phoneLength(formValidateData.phone.min)}}
+          </p>
+        </ng-container>
+      </div>
     </div>
+
     <div class="contact-pop-up__form__group">
       <label
-        for="formJob"
         class="contact-pop-up__form__group__label">
         {{formField.job}}: <span>*</span>
       </label>
       <input
         [ngClass]="{
           'contact-pop-up__form__group__field': true,
-          'fieldError': job.invalid && job.touched || job.dirty}"
+          'field-error': job.invalid && job.touched || job.dirty}"
         type="text"
         [maxlength]="formValidateData.job.max"
         formControlName="job"
-        placeholder="enter you job position"
-        #formJob />
+        placeholder="enter you job position" />
+      <div class="contact-pop-up__form__group__error">
+        <ng-container
+          *ngIf="job.invalid && job.touched || job.dirty">
+          <p
+            *ngIf="job.errors?.['required']">
+            {{errorMessage.empty}}
+          </p>
+          <p
+            *ngIf="job.errors?.['minlength']">
+            {{errorMessage.minLength(formValidateData.job.min)}}
+          </p>
+        </ng-container>
+      </div>
     </div>
+
     <div class="contact-pop-up__form__group">
       <label
-        for="formBirthday"
         class="contact-pop-up__form__group__label">
         {{formField.birthDate}}: <span>*</span>
       </label>
       <input
         [ngClass]="{
           'contact-pop-up__form__group__field': true,
-          'fieldError': birthDate.invalid && birthDate.touched || birthDate.dirty}"
+          'field-error': birthDate.invalid && birthDate.touched || birthDate.dirty}"
         type="date"
-        formControlName="birthDate"
-        #formBirthday />
+        formControlName="birthDate" />
+      <div class="contact-pop-up__form__group__error">
+        <ng-container
+          *ngIf="birthDate.invalid && birthDate.touched || birthDate.dirty">
+          <p
+            *ngIf="birthDate.errors?.['required']">
+            {{errorMessage.empty}}
+          </p>
+          <p
+            *ngIf="birthDate.hasError('date')">
+            {{errorMessage.age}}
+          </p>
+        </ng-container>
+      </div>
     </div>
 
     <div class="contact-pop-up__form__button-wrap">
