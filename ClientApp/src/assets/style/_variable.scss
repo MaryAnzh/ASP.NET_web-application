@@ -5,13 +5,16 @@ $mainColorFont: #244d01;
 $mainColorLight: #8ad646;
 $mainColorExtraLight: #d4ecbf;
 $backgroundColor: #fff;
+$contrastColor: #f186a8;
+$contrastColorDark: #BD2153;
 
 
 //size
 $maxAppSize: 1200px;
 $iconSize: 30px;
 $maxListWidth: 500px;
-$maxFormWidth: 500px;
+$maxFormWidth: 520px;
+$plusPadding: 7px;
 
 %popUp {
   position: fixed;

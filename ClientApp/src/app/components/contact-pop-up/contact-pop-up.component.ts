@@ -3,14 +3,8 @@ import { FormGroup, FormControl, AbstractControl, Validators } from '@angular/fo
 import { IContact, ICreateContact, ModeInfo, PopUpMode } from 'src/app/interfaces/contact.interface';
 import { ContactsService } from 'src/app/services/contactsService/contacts.service';
 import { CustomValidators } from 'src/app/utile/CustomValidators';
+import { formValidateData, FormField } from 'src/app/constants';
 
-
-enum FormField {
-  name = 'name',
-  phone = 'phone',
-  job = 'job',
-  birthDate = 'birthDate'
-}
 
 @Component({
   selector: 'app-contact-pop-up',
@@ -27,6 +21,8 @@ export class ContactPopUpComponent implements OnInit {
     job: FormField.job,
     birthDate: FormField.birthDate
   }
+  public formValidateData = formValidateData;
+
 
   constructor(
     private contactService: ContactsService
@@ -36,18 +32,18 @@ export class ContactPopUpComponent implements OnInit {
     this.newContactForm = new FormGroup({
       [FormField.name]: new FormControl('', [
         Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(32)
+        Validators.minLength(this.formValidateData[FormField.name].min),
+        Validators.maxLength(this.formValidateData[FormField.name].max)
       ]),
       [FormField.phone]: new FormControl('', [
         Validators.required,
-        Validators.minLength(12),
-        Validators.maxLength(16)
+        Validators.minLength(this.formValidateData[FormField.phone].min),
+        Validators.maxLength(this.formValidateData[FormField.phone].max)
       ]),
       [FormField.job]: new FormControl('', [
         Validators.required,
-        Validators.maxLength(50),
-        Validators.minLength(3),
+        Validators.minLength(this.formValidateData[FormField.job].min),
+        Validators.maxLength(this.formValidateData[FormField.job].max),
       ]),
       [FormField.birthDate]: new FormControl('', [
         Validators.required,
@@ -94,7 +90,7 @@ export class ContactPopUpComponent implements OnInit {
         this.updateContact(contact);
         break;
     }
-    this.contactService.closePopUp();
+    this.close();
   }
 
   updateContact(contact: ICreateContact) {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { IContact, ICreateContact, ModeInfo, PopUpStatus } from 'src/app/interfaces/contact.interface';
+import { IContact, ICreateContact, ModeInfo, PopUpMode, PopUpStatus } from 'src/app/interfaces/contact.interface';
 import { HttpService } from '../httpService/http-service.service';
 
 

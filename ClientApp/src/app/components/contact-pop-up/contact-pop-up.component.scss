@@ -1,5 +1,6 @@
 @import '../../../assets/style/variable';
 
+
 :host {
   @extend %popUp;
 
@@ -9,8 +10,7 @@
   }
 
   .fieldError {
-    border-color: red;
-    background: rgb(253, 242, 242);
+    border-bottom-color: $contrastColor;
   }
 
   .contact-pop-up {
@@ -40,8 +40,56 @@
       display: flex;
       flex-direction: column;
 
+      &__group {
+        position: relative;
+        padding-top: 2rem;
+        display: flex;
+        flex-direction: column;
+
+        &__label {
+          font-weight: 300;
+          padding-bottom: 0.6rem;
+
+          &::first-letter {
+            text-transform: uppercase;
+          }
+
+          span {
+            color: $contrastColorDark;
+          }
+        }
+
+        &__field {
+          padding: 0.4rem;
+          border: none;
+          outline: none;
+          border-bottom: 1px solid $mainColorLight;
+          color: $mainColorFont;
+
+          &:focus {
+            border: none;
+            border-bottom-color: $mainColorDark;
+          }
+
+          &::placeholder {
+            color: $mainColorLight;
+          }
+        }
+
+        &__phone-plus {
+          position: absolute;
+          bottom: $plusPadding;
+          left: $plusPadding;
+        }
+
+        &__field-phone {
+          padding-left: calc($plusPadding * 3);
+        }
+      }
+
       &__button-wrap {
         width: 100%;
+        padding-top: 1rem;
         display: flex;
         justify-content: flex-end;
 

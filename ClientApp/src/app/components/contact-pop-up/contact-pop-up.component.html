@@ -5,38 +5,77 @@
     class="contact-pop-up__cross"
     (click)="close()"></div>
   <h3 class="contact-pop-up__title">{{mode.mode}} Contact</h3>
+
   <form
     class="contact-pop-up__form"
     [formGroup]="newContactForm"
     (submit)="submit()">
+
     <div class="contact-pop-up__form__group">
-      <label>{{formField.name}}</label>
+      <label
+        for="formName"
+        class="contact-pop-up__form__group__label">
+        {{formField.name}}: <span>*</span>
+      </label>
       <input
-        [ngClass]="{'fieldError': name.invalid}"
+        [ngClass]="{
+          'contact-pop-up__form__group__field': true,
+          'fieldError': name.invalid && name.touched || name.dirty}"
         type="text"
-        formControlName="name" />
+        [maxlength]="formValidateData.name.max"
+        formControlName="name"
+        placeholder="enter you name"
+        #formName />
     </div>
     <div class="contact-pop-up__form__group">
-      <label>{{formField.phone}}</label>
+      <label
+        for="formPhone"
+        class="contact-pop-up__form__group__label">
+        {{formField.phone}}: <span>*</span>
+      </label>
+      <span class="contact-pop-up__form__group__phone-plus">+</span>
       <input
-        [ngClass]="{'fieldError': phone.invalid}"
+        [ngClass]="{
+          'contact-pop-up__form__group__field': true,
+          'contact-pop-up__form__group__field-phone': true,
+          'fieldError': phone.invalid && phone.touched || phone.dirty}"
         type="text"
-        formControlName="phone" />
+        [maxlength]="formValidateData.phone.max"
+        formControlName="phone"
+        placeholder="{{formValidateData.phone.max}} symbols"
+        #formPhone />
     </div>
     <div class="contact-pop-up__form__group">
-      <label>{{formField.job}}</label>
+      <label
+        for="formJob"
+        class="contact-pop-up__form__group__label">
+        {{formField.job}}: <span>*</span>
+      </label>
       <input
-        [ngClass]="{'fieldError': job.invalid}"
+        [ngClass]="{
+          'contact-pop-up__form__group__field': true,
+          'fieldError': job.invalid && job.touched || job.dirty}"
         type="text"
-        formControlName="job" />
+        [maxlength]="formValidateData.job.max"
+        formControlName="job"
+        placeholder="enter you job position"
+        #formJob />
     </div>
     <div class="contact-pop-up__form__group">
-      <label>{{formField.birthDate}}</label>
+      <label
+        for="formBirthday"
+        class="contact-pop-up__form__group__label">
+        {{formField.birthDate}}: <span>*</span>
+      </label>
       <input
-        [ngClass]="{'fieldError': birthDate.invalid}"
+        [ngClass]="{
+          'contact-pop-up__form__group__field': true,
+          'fieldError': birthDate.invalid && birthDate.touched || birthDate.dirty}"
         type="date"
-        formControlName="birthDate" />
+        formControlName="birthDate"
+        #formBirthday />
     </div>
+
     <div class="contact-pop-up__form__button-wrap">
       <button
         [ngClass]="{'contact-pop-up__form__button-wrap__submit': true, 'disable': newContactForm.invalid}">{{mode.mode}}</button>

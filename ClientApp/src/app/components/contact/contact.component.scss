@@ -63,7 +63,7 @@
   @media (max-width: 780px) {
     .contact {
       width: 100%;
-      padding-bottom: 1rem;
+      padding: 1rem 0.2rem;
       display: grid;
       grid-template-columns: 20px repeat(2, auto);
       grid-template-rows: repeat(3, auto);
@@ -73,6 +73,10 @@
 
       li {
         border: none;
+        overflow: unset;
+        white-space: unset;
+
+
       }
 
       &__item:nth-child(1) {
