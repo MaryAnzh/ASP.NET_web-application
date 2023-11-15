@@ -3,7 +3,7 @@ import { FormGroup, FormControl, AbstractControl, Validators } from '@angular/fo
 import { IContact, ICreateContact, ModeInfo, PopUpMode } from 'src/app/interfaces/contact.interface';
 import { ContactsService } from 'src/app/services/contactsService/contacts.service';
 import { CustomValidators } from 'src/app/utile/CustomValidators';
-import { formValidateData, FormField, errorMessage } from 'src/app/constants';
+import { formValidateData, FormField, errorMessage, formsPlaceholder } from 'src/app/constants';
 
 
 @Component({
@@ -23,7 +23,7 @@ export class ContactPopUpComponent implements OnInit {
   }
   public formValidateData = formValidateData;
   public errorMessage = errorMessage;
-
+  public formsPlaceholder = formsPlaceholder;
 
   constructor(
     private contactService: ContactsService
@@ -39,7 +39,8 @@ export class ContactPopUpComponent implements OnInit {
       [FormField.phone]: new FormControl('', [
         Validators.required,
         Validators.minLength(this.formValidateData[FormField.phone].min),
-        Validators.maxLength(this.formValidateData[FormField.phone].max)
+        Validators.maxLength(this.formValidateData[FormField.phone].max),
+        Validators.pattern(/^[0-9]+$/)
       ]),
       [FormField.job]: new FormControl('', [
         Validators.required,
@@ -103,5 +104,14 @@ export class ContactPopUpComponent implements OnInit {
 
   close(): void {
     this.contactService.closePopUp();
+  }
+
+  numberCheckerOnInput(): void {
+    const reg = /^[0-9]+$/;
+    const value = this.phone.value[this.phone.value.length - 1];
+    if (!reg.test(value)) {
+      const checkedValue = this.phone.value.replace(value, '');
+      this.phone.setValue(checkedValue);
+    }
   }
 }

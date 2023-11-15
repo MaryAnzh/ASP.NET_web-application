@@ -23,7 +23,7 @@
         type="text"
         [maxlength]="formValidateData.name.max"
         formControlName="name"
-        placeholder="enter you name" />
+        [placeholder]="formsPlaceholder.name" />
       <div class="contact-pop-up__form__group__error">
         <ng-container
           *ngIf="name.invalid && name.touched || name.dirty">
@@ -50,10 +50,11 @@
         <input
           [ngClass]="{
           'field-error': phone.invalid && phone.touched || phone.dirty}"
-          type="tel"
+          type="text"
+          (input)="numberCheckerOnInput()"
           [maxlength]="formValidateData.phone.max"
           formControlName="phone"
-          placeholder="{{formValidateData.phone.max}} symbols"
+          [placeholder]="formsPlaceholder.phone(formValidateData.phone.min)"
           #formPhone />
       </div>
       <div class="contact-pop-up__form__group__error">
@@ -83,7 +84,7 @@
         type="text"
         [maxlength]="formValidateData.job.max"
         formControlName="job"
-        placeholder="enter you job position" />
+        [placeholder]="formsPlaceholder.job" />
       <div class="contact-pop-up__form__group__error">
         <ng-container
           *ngIf="job.invalid && job.touched || job.dirty">
