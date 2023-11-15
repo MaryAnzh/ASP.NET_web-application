@@ -53,7 +53,11 @@
     }
 
     &__list {
-      width: 100%;
+      width: fit-content;
+
+      :nth-child(2n+1) {
+        background-color: $mainColorExtraLight2;
+      }
 
       @media (max-width: 780px) {
         display: flex;
