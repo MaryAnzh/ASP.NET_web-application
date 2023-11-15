@@ -5,7 +5,9 @@
   width: 100%;
   padding: 1rem;
   display: flex;
-.contact-card {}
+
+  .contact-card {}
+
   .contacts {
     width: 100%;
 
@@ -25,16 +27,19 @@
       }
 
       &__icon {
-        font-size: 1.5rem;
-        color: $mainColorLight;
-        cursor: pointer;
-        transition: .3s;
-
-        &:hover {
-          color: $mainColorDark;
-        }
+        @extend %headersIcon;
       }
+    }
 
+    &__add-random {
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      &__icon {
+        @extend %headersIcon;
+      }
     }
 
     &__view {

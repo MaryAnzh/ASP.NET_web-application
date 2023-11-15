@@ -50,9 +50,8 @@ export class ContactsService {
   deleteContact(id: string): void {
     this.httpService.deleteContact(id)
       .subscribe({
-        next: (value) => {
+        next: () => {
           this.getContacts();
-          console.log(value)
         },
         error: (error) => console.error(error.statusText),
       })

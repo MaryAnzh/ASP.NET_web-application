@@ -103,3 +103,14 @@ $plusPadding: 7px;
     transform: scale(0.9);
   }
 }
+
+%headersIcon {
+  font-size: 1.5rem;
+  color: $mainColorLight;
+  cursor: pointer;
+  transition: .3s;
+
+  &:hover {
+    color: $mainColorDark;
+  }
+}
