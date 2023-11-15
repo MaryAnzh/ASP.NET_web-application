@@ -1,0 +1,23 @@
+@import '../assets/style/variable';
+
+:host {
+  width: 100%;
+  display: flex;
+  color: $mainColorFont;
+
+  .wrapper {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    .main {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      flex: 1 0 auto
+    }
+  }
+}

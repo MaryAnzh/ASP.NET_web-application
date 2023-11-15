@@ -1,0 +1,54 @@
+<section class="contacts">
+  <ng-container
+    *ngIf="isPopUpOpen$ | async as mode">
+    <app-contact-pop-up
+      [mode]="mode"></app-contact-pop-up>
+  </ng-container>
+
+  <div class="contacts__title">
+    <h2 class="contacts__title__headers">Contacts</h2>
+    <span
+      class="contacts__title__count"
+      *ngIf="contacts$ | async as list">
+      {{list.length}}
+    </span>
+    <i
+      class="fa-solid fa-file-circle-plus contacts__title__icon"
+      title="add new contact"
+      (click)="showCreateContactPopUp()">
+    </i>
+  </div>
+  <div class="contacts__add-random">
+    <span>Create {{randomContactCount}} random contacts</span>
+    <i class="fa-regular fa-square-plus contacts__add-random__icon"
+      (click)="createRandomContactList()"></i>
+  </div>
+  <!-- <div class="contacts__view">
+    <i class="fa-solid fa-list contacts__view__icon"></i>
+    <i class="fa-solid fa-table-cells contacts__view__icon"></i>
+  </div> -->
+  <ul
+    class="contacts__list">
+    <app-contact
+      [isHeaders]="true">
+    </app-contact>
+    <ng-container
+      *ngIf="contacts$ | async as contacts">
+      <app-contact
+        *ngFor="let contact of contacts; index as i; trackBy: trackByFn"
+        [contact]="contact"
+        [number]="i + 1">
+      </app-contact>
+      <p
+        *ngIf="contacts.length === 0">
+        <span>Add new Contact with</span>
+        <br />
+        <i
+          class="fa-solid fa-file-circle-plus contacts__title__icon"
+          title="add new contact"
+          (click)="showCreateContactPopUp()">
+        </i>
+      </p>
+    </ng-container>
+  </ul>
+</section>

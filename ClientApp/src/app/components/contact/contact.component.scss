@@ -1,0 +1,110 @@
+@import '../../../assets/style/variable';
+
+:host {
+  width: 100%;
+  display: flex;
+
+  .contact {
+    display: flex;
+
+
+    &__item {
+      padding: 0.4rem 0.6rem;
+      border-right: 1px dotted $mainColor;
+
+      &__icon {
+        @extend %icons;
+      }
+    }
+
+    // count
+    &__item:nth-child(1) {
+      width: 60px;
+      text-align: right;
+    }
+
+    //name, job
+    &__item:nth-child(2),
+    &__item:nth-child(4) {
+      width: 160px;
+      word-wrap: break-word;
+    }
+
+    //phone
+    &__item:nth-child(3) {
+      width: 150px;
+    }
+
+    //birthday
+    &__item:nth-child(5) {
+      width: 110px;
+      font-size: 0.875rem;
+    }
+
+    //action
+    &__item:nth-child(6),
+    &__item:nth-child(7) {
+      width: 60px;
+      text-align: center;
+    }
+
+    &__item:nth-child(7) {
+      border: none;
+    }
+
+  }
+
+  .header {
+    &__item {
+      background-color: $mainColorExtraLight;
+    }
+  }
+
+  @media (max-width: 780px) {
+    .contact {
+      width: 100%;
+      padding: 1rem 0.2rem;
+      display: grid;
+      grid-template-columns: 20px repeat(2, auto);
+      grid-template-rows: repeat(3, auto);
+      gap: 1rem;
+      border-radius: 0.6rem;
+      box-shadow: 5px 5px 8px rgba($color: gray, $alpha: 0.3);
+
+      li {
+        border: none;
+        overflow: unset;
+        white-space: unset;
+      }
+
+      &__item:nth-child(1) {
+        width: fit-content;
+        background-color: $mainColorExtraLight;
+        border-radius: 0.25rem;
+      }
+
+      &__item:nth-child(2) {
+        font-size: 1.25rem;
+        font-weight: 500;
+      }
+
+      &__item:nth-child(5) {
+        grid-column: span 2;
+      }
+
+      &__item:nth-child(3),
+      &__item:nth-child(5) {
+        justify-self: self-end;
+      }
+    }
+
+    li:nth-child(4) {
+      height: 70px;
+      word-wrap: break-word;
+    }
+
+    .header {
+      display: none;
+    }
+  }
+}

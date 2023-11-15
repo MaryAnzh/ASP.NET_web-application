@@ -1,0 +1,25 @@
+<ul class="contact header"
+  *ngIf="isHeaders">
+  <li
+    class="contact__item header__item"
+    *ngFor="let item of contactHeader">{{item}}
+  </li>
+</ul>
+<ul
+  [ngClass]="{'contact': true, 'contact-card': false}"
+  *ngIf="contact && !isHeaders">
+  <li class="contact__item ">{{number}}</li>
+  <li class="contact__item">{{contact.name}}</li>
+  <li class="contact__item">+{{contact.mobilePhone}}</li>
+  <li class="contact__item">{{contact.jobTitle}}</li>
+  <li class="contact__item">{{contact.birthDate | date | date: ' d MMM, y'}}</li>
+  <li
+    class="contact__item"
+    (click)="editContact()">
+    <i class="fa-solid fa-pen-to-square contact__item__icon"></i> </li>
+  <li
+    class="contact__item"
+    (click)="delete()">
+    <i class="fa-solid fa-trash-can contact__item__icon"></i>
+  </li>
+</ul>
