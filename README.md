@@ -33,13 +33,18 @@ ClientApp\src\app\services\httpService\http-service.service.ts
 - Форма ввода данных реализована при помощи ReactiveForms, с их же помощью реализована валидация данных и отображение сообщений об ошибках валидации для пользователя
 ![image](https://github.com/MaryAnzh/ASP.NET_web-application/assets/89520164/a5af40f9-083e-4b9c-879d-ad2c5242fc84)
 
+![image](https://github.com/MaryAnzh/ASP.NET_web-application/assets/89520164/b0a017d1-eed9-4de1-80e1-23a0a792815d)
+
 ## Запуск приложения:
 
 - Для запуска приложения используйте команду в терминале dotnet run
 
 - Для инициализации БД 
+
 dotnet tool install --global dotnet-ef
+
 dotnet ef migrations add InitialCreate
+
 dotnet ef database update
 
 - Для запуска Angular приложения перейдете по ссылке, которая отображена в info, после запуска dotnet run
